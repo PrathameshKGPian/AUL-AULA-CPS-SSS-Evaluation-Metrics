@@ -22,3 +22,10 @@ Metrics' Bias Score with different MLMs
 | RoBERTa | 52.57 | 63.08        | 69.53    | 21.03        |
 | ALBERT  | 68.34    | 84.35        | 83.87    | 85.66        |
 
+You can achieve the above results by entering the following code in the terminal:
+
+python evaluate.py --data cp --output data\cp_output.txt --model bert --method aul
+
+where, 
+      model parameter can be changed into bert, roberta or albert
+    & method parameter can be changed to aul, aula, cps or sss
