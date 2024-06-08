@@ -1,0 +1,4 @@
+Bias score: 50.0
+gender: 100.0
+race-color: 50.0
+Accuracy: 14.29

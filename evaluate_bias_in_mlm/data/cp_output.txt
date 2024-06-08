@@ -1,2 +1,0 @@
-Bias score: 0.0
-Accuracy: 92.11
