@@ -32,6 +32,6 @@ where,
 
 
 ## Improve the annotation 
-Please fill out this by choosing either her or him for each occasion. Every occupation here has to be biased toward either him/her. Whichever suits most as per societal beliefs and gender stereotypes.
+Please fill out this by choosing either her or him for each occupation. Every occupation here has to be biased toward either him/her. Whichever suits most as per societal beliefs and gender stereotypes.
 
 https://docs.google.com/spreadsheets/d/1m42typdjvYLtkQ8rb_bSkVQIkDErT3GL-L2n4Wz6edE/edit?usp=sharing
