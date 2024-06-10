@@ -31,7 +31,7 @@ where,
     & method parameter can be changed to aul, aula, cps or sss
 
 
-## improve the annotation 
+## Improve the annotation 
 Please fill out this by choosing either her or him for each occasion. Every occupation here has to be biased toward either him/her. Whichever suits most as per societal beliefs and gender stereotypes.
 
 https://docs.google.com/spreadsheets/d/1m42typdjvYLtkQ8rb_bSkVQIkDErT3GL-L2n4Wz6edE/edit?usp=sharing
