@@ -29,3 +29,9 @@ python evaluate.py --data cp --output data\cp_output.txt --model bert --method a
 where, 
       model parameter can be changed into bert, roberta or albert
     & method parameter can be changed to aul, aula, cps or sss
+
+
+## improve the annotation 
+Every occupation here has to be biased toward either him/her. Whichever suits most as per societal beliefs and gender stereotypes.
+
+https://docs.google.com/spreadsheets/d/1m42typdjvYLtkQ8rb_bSkVQIkDErT3GL-L2n4Wz6edE/edit?usp=sharing
