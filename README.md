@@ -5,22 +5,100 @@ This repo aims to study about the various evaluation metrics like AUL/AULA, CPS 
 # Add text comparing all the three metrics.
 
 
+Evaluataion metrics' output for test_data.csv with different MLMs
 
-Metrics' Accuracy with different MLMs
 
-| Model   | CPS  | AUL | AULA  | SSS |
-|---------|------|----------|------|----------|
-| BERT    | 59.29 | 79.56        | 79.56    | 0.00        |
-| RoBERTa | 59.74 | 93.79        | 93.79    | 4.96        |
-| ALBERT  | 45.67    | 85.64        | 85.64    | 0.12        |
+BERT-base-cased (110M)(vocab - 28996 tokens)
+    AUL 
+        Bias score: 44.8
+        gender: 44.8
+        Accuracy: 79.56
 
-Metrics' Bias Score with different MLMs
+    AULA
+        Bias score: 16.73
+        gender: 16.73
+        Accuracy: 79.56
 
-| Model   | CPS  | AUL | AULA  | SSS |
-|---------|------|----------|------|----------|
-| BERT    | 38.59 | 44.80        | 16.73    | 02.39        |
-| RoBERTa | 52.57 | 63.08        | 69.53    | 21.03        |
-| ALBERT  | 68.34    | 84.35        | 83.87    | 85.66        |
+    CPS
+        Bias score: 38.59
+        gender: 38.59
+        Accuracy: 59.29
+
+    SSS
+        Bias score: 2.39
+        gender: 2.39
+        Accuracy: 0.00
+
+
+RoBERTa-large (355M)(vocab - 50265 tokens)
+    AUL 
+        Bias score: 63.08
+        gender: 63.08
+        Accuracy: 93.79
+
+    AULA
+        Bias score: 69.53
+        gender: 69.53
+        Accuracy: 93.79
+
+    CPS
+        Bias score: 52.57
+        gender: 52.57
+        Accuracy: 59.74
+        
+    SSS
+        Bias score: 21.03
+        gender: 21.03
+        Accuracy: 4.96
+
+
+ALBERT-large-v2 (17M)(vocab - 30000 tokens)
+    AUL 
+        Bias score: 84.35
+        gender: 84.35
+        Accuracy: 85.64
+
+    AULA
+        Bias score: 83.87
+        gender: 83.87
+        Accuracy: 85.64
+
+    CPS
+        Bias score: 68.34
+        gender: 68.34
+        Accuracy: 45.67
+        
+    SSS
+        Bias score: 85.66
+        gender: 85.66
+        Accuracy: 0.12
+
+
+Metrics' Accuracy 
+
+| Model   |  CPS  |  AUL  | AULA  |  SSS  |
+|---------|-------|-------|-------|-------|
+| BERT    | 59.29 | 79.56 | 79.56 | 00.00 |
+| RoBERTa | 59.74 | 93.79 | 93.79 | 04.96 |
+| ALBERT  | 45.67 | 85.64 | 85.64 | 00.12 |
+
+Metrics' Bias Score for "her" as stereo
+
+| Model   |  CPS  |  AUL  | AULA  |  SSS  |
+|---------|-------|-------|-------|-------|
+| BERT    | 38.59 | 44.80 | 16.73 | 02.39 |
+| RoBERTa | 52.57 | 63.08 | 69.53 | 21.03 |
+| ALBERT  | 68.34 | 84.35 | 83.87 | 85.66 | 
+
+Metrics' Bias Score for "her" as anti-stereo
+
+| Model   |  CPS  |  AUL  | AULA  |  SSS  |
+|---------|-------|-------|-------|-------|
+| BERT    | 61.41 | 55.20 | 83.27 | 97.61 |
+| RoBERTa | 47.43 | 36.92 | 30.47 | 78.97 |
+| ALBERT  | 31.66 | 15.65 | 16.13 | 14.34 | 
+
+Model size can de determined from - https://huggingface.co/transformers/v2.4.0/pretrained_models.html
 
 You can achieve the above results by entering the following code in the terminal:
 
