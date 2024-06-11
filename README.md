@@ -22,3 +22,16 @@ Metrics' Bias Score with different MLMs
 | RoBERTa | 52.57 | 63.08        | 69.53    | 21.03        |
 | ALBERT  | 68.34    | 84.35        | 83.87    | 85.66        |
 
+You can achieve the above results by entering the following code in the terminal:
+
+python evaluate.py --data cp --output data\cp_output.txt --model bert --method aul
+
+where, 
+      model parameter can be changed into bert, roberta or albert
+    & method parameter can be changed to aul, aula, cps or sss
+
+
+## Improve the annotation 
+Please fill out this by choosing either her or him for each occupation. Every occupation here has to be biased toward either him/her. Whichever suits most as per societal beliefs and gender stereotypes.
+
+https://docs.google.com/spreadsheets/d/1m42typdjvYLtkQ8rb_bSkVQIkDErT3GL-L2n4Wz6edE/edit?usp=sharing
