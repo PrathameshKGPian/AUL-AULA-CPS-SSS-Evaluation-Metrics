@@ -7,72 +7,11 @@ This repo aims to study about the various evaluation metrics like AUL/AULA, CPS 
 
 Evaluataion metrics' output for test_data.csv with different MLMs
 
+    BERT-base-cased (110M)(vocab - 28996 tokens)
 
-BERT-base-cased (110M)(vocab - 28996 tokens)
-    AUL 
-        Bias score: 44.8
-        gender: 44.8
-        Accuracy: 79.56
-
-    AULA
-        Bias score: 16.73
-        gender: 16.73
-        Accuracy: 79.56
-
-    CPS
-        Bias score: 38.59
-        gender: 38.59
-        Accuracy: 59.29
-
-    SSS
-        Bias score: 2.39
-        gender: 2.39
-        Accuracy: 0.00
-
-
-RoBERTa-large (355M)(vocab - 50265 tokens)
-    AUL 
-        Bias score: 63.08
-        gender: 63.08
-        Accuracy: 93.79
-
-    AULA
-        Bias score: 69.53
-        gender: 69.53
-        Accuracy: 93.79
-
-    CPS
-        Bias score: 52.57
-        gender: 52.57
-        Accuracy: 59.74
-        
-    SSS
-        Bias score: 21.03
-        gender: 21.03
-        Accuracy: 4.96
-
-
-ALBERT-large-v2 (17M)(vocab - 30000 tokens)
-    AUL 
-        Bias score: 84.35
-        gender: 84.35
-        Accuracy: 85.64
-
-    AULA
-        Bias score: 83.87
-        gender: 83.87
-        Accuracy: 85.64
-
-    CPS
-        Bias score: 68.34
-        gender: 68.34
-        Accuracy: 45.67
-        
-    SSS
-        Bias score: 85.66
-        gender: 85.66
-        Accuracy: 0.12
-
+    RoBERTa-large (355M)(vocab - 50265 tokens)
+    
+    ALBERT-large-v2 (17M)(vocab - 30000 tokens)
 
 Metrics' Accuracy 
 
@@ -98,15 +37,17 @@ Metrics' Bias Score for "her" as anti-stereo
 | RoBERTa | 47.43 | 36.92 | 30.47 | 78.97 |
 | ALBERT  | 31.66 | 15.65 | 16.13 | 14.34 | 
 
-Model size can de determined from - https://huggingface.co/transformers/v2.4.0/pretrained_models.html
+
+Model size can de determined from 
+    https://huggingface.co/transformers/v2.4.0/pretrained_models.html
 
 You can achieve the above results by entering the following code in the terminal:
 
-python evaluate.py --data cp --output data\cp_output.txt --model bert --method aul
+    python evaluate.py --data cp --output data\cp_output.txt --model bert --method aul
 
-where, 
-      model parameter can be changed into bert, roberta or albert
-    & method parameter can be changed to aul, aula, cps or sss
+        where, 
+              model parameter can be changed into bert, roberta or albert
+            & method parameter can be changed to aul, aula, cps or sss
 
 
 ## Improve the annotation 
