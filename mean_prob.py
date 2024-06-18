@@ -17,7 +17,7 @@ def sentence_prob_mean(text):
     # Tokenize the input text and add special tokens
     input_ids = tokenizer.encode(text, return_tensors='pt')
 
-    # Obtain model outputs
+    # model outputs 
     with torch.no_grad():
         outputs = model(input_ids, labels=input_ids)
         logits = outputs.logits  # logits are the model outputs before applying softmax
@@ -26,13 +26,13 @@ def sentence_prob_mean(text):
     shift_logits = logits[..., :-1, :].contiguous()
     shift_labels = input_ids[..., 1:].contiguous()
 
-    # softmax probabilities
+    # Softmax probabilities
     probs = softmax(shift_logits, dim=-1)
 
-    # the probabilities of the actual token IDs
+    # The probabilities of the actual token IDs
     gathered_probs = torch.gather(probs, 2, shift_labels.unsqueeze(-1)).squeeze(-1)
 
-    # mean probability across the tokens
+    # The mean probability across the tokens
     mean_prob = torch.mean(gathered_probs).item()
 
     return mean_prob
