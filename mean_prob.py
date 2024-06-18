@@ -26,13 +26,13 @@ def sentence_prob_mean(text):
     shift_logits = logits[..., :-1, :].contiguous()
     shift_labels = input_ids[..., 1:].contiguous()
 
-    # Calculate the softmax probabilities
+    # softmax probabilities
     probs = softmax(shift_logits, dim=-1)
 
-    # Gather the probabilities of the actual token IDs
+    # the probabilities of the actual token IDs
     gathered_probs = torch.gather(probs, 2, shift_labels.unsqueeze(-1)).squeeze(-1)
 
-    # Compute the mean probability across the tokens
+    # mean probability across the tokens
     mean_prob = torch.mean(gathered_probs).item()
 
     return mean_prob
