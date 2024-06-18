@@ -1,5 +1,16 @@
-tokenizer = GPT2Tokenizer.from_pretrained('gpt2-xl')
-model = GPT2LMHeadModel.from_pretrained('gpt2-xl')
+#!/usr/bin/env python3
+import sys
+import argparse
+import torch
+import re
+import os
+import torch
+from transformers import GPT2Tokenizer, GPT2LMHeadModel
+from torch.nn.functional import softmax
+import numpy as np
+
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+model = GPT2LMHeadModel.from_pretrained('gpt2')
 
 
 def sentence_prob_mean(text):
