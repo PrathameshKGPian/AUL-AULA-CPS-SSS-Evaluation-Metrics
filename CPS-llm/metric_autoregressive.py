@@ -17,7 +17,7 @@ def get_log_prob_unigram_autoregressive(prev_token_ids, full_token_ids, tgt_idx,
     """
     Given a sequence of token ids, with one masked token, return the log probability of the masked token.
     """
-    print("---------------get_log_prob_unigram_autoregressive starts-----------")
+    # print("---------------get_log_prob_unigram_autoregressive starts-----------")
 
     model = lm["model"]
     tokenizer = lm["tokenizer"]
@@ -27,21 +27,21 @@ def get_log_prob_unigram_autoregressive(prev_token_ids, full_token_ids, tgt_idx,
     # get model hidden states
     output = model(prev_token_ids)
     hidden_states = output[0].squeeze(0)
-    print("hidden_states : ", hidden_states)
-    print("hidden_states size : ", hidden_states.size())
+    # print("hidden_states : ", hidden_states)
+    # print("hidden_states size : ", hidden_states.size())
     
     hs = hidden_states[-1] # use logits for next word prediction
-    print("hs : ", hs)
-    print("hs size : ", hs.size())
+    # print("hs : ", hs)
+    # print("hs size : ", hs.size())
 
 
     target_id = full_token_ids[0][tgt_idx]
-    print("tgt_idx : ", tgt_idx)
-    print("target_id : ", target_id)
+    # print("tgt_idx : ", tgt_idx)
+    # print("target_id : ", target_id)
 
     log_probs = log_softmax(hs)[target_id]
-    print("log_probs : ", log_probs)
-    print("log_probs size : ", log_probs.size())
+    # print("log_probs : ", log_probs)
+    # print("log_probs size : ", log_probs.size())
    
     return log_probs
 
@@ -49,13 +49,13 @@ def get_span(seq1, seq2):
     """
     This function extract spans that are shared between two sequences.
     """
-    print("-------get_span-------------")
+    # print("-------get_span-------------")
 
     seq1 = [str(x) for x in seq1.tolist()]
     seq2 = [str(x) for x in seq2.tolist()]
 
-    print("seq1 : ", seq1)
-    print("seq2 : ", seq2)
+    # print("seq1 : ", seq1)
+    # print("seq2 : ", seq2)
 
 
     matcher = difflib.SequenceMatcher(None, seq1, seq2)
@@ -69,8 +69,8 @@ def get_span(seq1, seq2):
             template1 += [x for x in range(op[1], op[2], 1)]
             template2 += [x for x in range(op[3], op[4], 1)]
 
-    print("template1 : ", template1)
-    print("template2 : ", template2)
+    # print("template1 : ", template1)
+    # print("template2 : ", template2)
 
     return template1, template2
 
@@ -83,7 +83,7 @@ def mask_unigram(data, lm, n=1):
     n = n-gram of token that is masked, if n > 1, we mask tokens with overlapping
     n-grams.
     """
-    print("---------------mask_unigram-----------------")
+    # print("---------------mask_unigram-----------------")
 
     model = lm["model"]
     tokenizer = lm["tokenizer"]
@@ -97,35 +97,35 @@ def mask_unigram(data, lm, n=1):
     sent1, sent2 = data["sent_more"], data["sent_less"]  
 
     if uncased:
-        print("------------uncased-------------")
+        # print("------------uncased-------------")
         sent1 = sent1.lower()
         sent2 = sent2.lower()
 
-    print("sent1 : ", sent1)
+    # print("sent1 : ", sent1)
 
-    print("sent2 : ", sent2) 
+    # print("sent2 : ", sent2) 
 
     # tokenize
     if mask_token:
-        print("--------mask_token = true-----------")
+        # print("--------mask_token = true-----------")
         sent1_token_ids = tokenizer.encode(sent1, return_tensors='pt')
         sent2_token_ids = tokenizer.encode(sent2, return_tensors='pt')
 
-        print("sent1_token_ids : ", sent1_token_ids)
-        print("sent2_token_ids : ", sent2_token_ids)  
+        # print("sent1_token_ids : ", sent1_token_ids)
+        # print("sent2_token_ids : ", sent2_token_ids)  
 
     else:
         # append BOS token for conditional generation
-        print("--------mask_token = false-----------")
+        # print("--------mask_token = false-----------")
 
         sent1_token_ids = tokenizer.encode(tokenizer.bos_token + sent1, return_tensors='pt', add_special_tokens=False)
         sent2_token_ids = tokenizer.encode(tokenizer.bos_token + sent2, return_tensors='pt', add_special_tokens=False)
         
-        print("sent1_token_ids : ", sent1_token_ids)
-        print("sent1_token_ids size : ", sent1_token_ids.size())
+        # print("sent1_token_ids : ", sent1_token_ids)
+        # print("sent1_token_ids size : ", sent1_token_ids.size())
 
-        print("sent2_token_ids : ", sent2_token_ids) 
-        print("sent2_token_ids size : ", sent2_token_ids.size()) 
+        # print("sent2_token_ids : ", sent2_token_ids) 
+        # print("sent2_token_ids size : ", sent2_token_ids.size()) 
 
     # get spans of non-changing tokens
     template1, template2 = get_span(sent1_token_ids[0], sent2_token_ids[0])
@@ -134,7 +134,7 @@ def mask_unigram(data, lm, n=1):
 
     N = len(template1)  # num. of tokens that can be masked
 
-    print("N : ", N)
+    # print("N : ", N)
 
     sent1_log_probs = 0.
     sent2_log_probs = 0.
@@ -144,48 +144,45 @@ def mask_unigram(data, lm, n=1):
     # pass to model one word at a time for autogressive models
     # start at 1 because BOS token is prepended
 
-    print("--------for loop starts-----------")
+    # print("--------for loop starts-----------")
 
     for i in range(1, N):
 
-        print("i : ", i)
+        # print("i : ", i)
 
         sent1_masked_token_ids = sent1_token_ids.clone().detach()[:, :template1[i]]
         sent2_masked_token_ids = sent2_token_ids.clone().detach()[:, :template1[i]]
 
-        print("sent1_masked_token_ids : ", sent1_masked_token_ids)
-        print("sent1_masked_token_ids size : ", sent1_masked_token_ids.size())
+        # print("sent1_masked_token_ids : ", sent1_masked_token_ids)
+        # print("sent1_masked_token_ids size : ", sent1_masked_token_ids.size())
 
-        print("sent2_masked_token_ids : ", sent2_masked_token_ids)
-        print("sent2_masked_token_ids size : ", sent2_masked_token_ids.size())
+        # print("sent2_masked_token_ids : ", sent2_masked_token_ids)
+        # print("sent2_masked_token_ids size : ", sent2_masked_token_ids.size())
 
         total_masked_tokens += 1
 
-        print("total_masked_tokens : ", total_masked_tokens)
+        # print("total_masked_tokens : ", total_masked_tokens)
         
         score1 = get_log_prob_unigram_autoregressive(sent1_masked_token_ids, sent1_token_ids, template1[i], lm)
         score2 = get_log_prob_unigram_autoregressive(sent2_masked_token_ids, sent2_token_ids, template2[i], lm)
  
-        # score1 = sentence_prob_mean(sent1_masked_token_ids, lm)
-        # score2 = sentence_prob_mean(sent2_masked_token_ids, lm)
-
-        print("score1 : ", score1)
+        # print("score1 : ", score1)
         # print("score1 size : ", score1.size())
 
-        print("score2 : ", score2)
+        # print("score2 : ", score2)
         # print("score2 size : ", score2.size())
 
         sent1_log_probs += score1.item()
         sent2_log_probs += score2.item()
 
-        print("sent1_log_probs : ", sent1_log_probs)
-        print("sent2_log_probs : ", sent2_log_probs)
+        # print("sent1_log_probs : ", sent1_log_probs)
+        # print("sent2_log_probs : ", sent2_log_probs)
     score = {}
     
     score["sent1_score"] = sent1_log_probs
     score["sent2_score"] = sent2_log_probs
 
-    print("score : ", score)
+    # print("score : ", score)
 
     return score
 
@@ -206,14 +203,6 @@ def evaluate(args):
 
     df_data = pd.read_csv(args.input_file)
 
-    def add_full_stop(sentence):
-        return sentence if sentence.endswith('.') else sentence + '.'
-
-    df_data['sent_more'] = df_data['sent_more'].apply(add_full_stop)
-    df_data['sent_less'] = df_data['sent_less'].apply(add_full_stop)
-
-    # df_data = df_data.drop(['del1','del2','del3','del4','del5','annotations','Unnamed: 0'], axis =1)
-
     # columns: Gender_ID_x, Gender_ID_y, sent_x, sent_y
     # x is always queer, y is always straight
     # i.e. sent_x is "more stereotypical" and sent_y is "less stereotypical"
@@ -224,19 +213,20 @@ def evaluate(args):
     # if args.lm_model_path[-1] == '/': args.lm_model_path = args.lm_model_path[:-1] 
     # base_model_path = "../new_finetune/pretrained/" + args.lm_model_path.split('/')[-1].split("-finetuned")[0]
     # tokenizer = AutoTokenizer.from_pretrained(base_model_path)
-    # if hasattr(tokenizer, 'do_lower_case'):
-    #     uncased = tokenizer.do_lower_case
-    # else:
-    #     uncased = False
-    # if "opt" in args.lm_model_path:
-    #     model = AutoModelForCausalLM.from_pretrained(args.lm_model_path)
-    # elif "gpt2" in args.lm_model_path or "bloom" in args.lm_model_path or "bart" in args.lm_model_path:
+ 
+    tokenizer = AutoTokenizer.from_pretrained(args.lm_model_path)
+
+    if hasattr(tokenizer, 'do_lower_case'):
+        uncased = tokenizer.do_lower_case
+    else:
+        uncased = False
+   
+    # if "gpt2" in args.lm_model_path or "bloom" in args.lm_model_path or "bart" in args.lm_model_path:
     #     model = AutoModelWithLMHead.from_pretrained(args.lm_model_path)
     # else:
     #     model = AutoModelForMaskedLM.from_pretrained(args.lm_model_path)   
-    #  
-    model = AutoModelWithLMHead.from_pretrained("gpt2")
-    tokenizer = AutoTokenizer.from_pretrained("gpt2")
+
+    model = AutoModelWithLMHead.from_pretrained(args.lm_model_path)
 
     if hasattr(tokenizer, 'do_lower_case'):
         uncased = tokenizer.do_lower_case
@@ -249,7 +239,7 @@ def evaluate(args):
 
     mask_token = tokenizer.mask_token
 
-    print("mask_token : ", mask_token)
+    # print("mask_token : ", mask_token)
 
     log_softmax = torch.nn.LogSoftmax(dim=0)
     vocab = tokenizer.get_vocab()
@@ -272,7 +262,7 @@ def evaluate(args):
                                      'sent_more_score', 'sent_less_score',
                                      'score', 'bias_target_group'])
 
-    print("df_score : ", df_score)
+    # print("df_score : ", df_score)
 
     total_pairs = 0
     stereo_score =  0
@@ -284,23 +274,23 @@ def evaluate(args):
     neutral = 0
     total = len(df_data.index)
 
-    print("total : ", total)
+    # print("total : ", total)
 
-    print("----------for loop starts ------------")
+    # print("----------for loop starts ------------")
     with tqdm(total=total) as pbar:
         for index, data in df_data.iterrows():
             bias = data['Gender_ID_x']
             score = mask_unigram(data, lm)
 
-            print("score : ", score)
+            # print("score : ", score)
 
             # round all scores to 3 places
             for stype in score.keys():
                 score[stype] = round(score[stype], 3)
-                print("score[stype] : ", score[stype])
+                # print("score[stype] : ", score[stype])
 
             N += 1
-            print("N : ", N)
+            # print("N : ", N)
 
             category_scores[bias]['count'] += 1
             pair_score = 0
