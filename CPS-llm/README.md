@@ -1,6 +1,6 @@
 To run the CPS-llm code for its data, paste the following command in VS code terminal:
 
-    python CPS-llm\metric_autoregressive.py --input_file CPS-llm\test_data.csv --lm_model_path gpt2 --output_file output_autoreg
+    python CPS-llm\metric_autoregressive.py --input_file CPS-llm\test_data.csv --lm_model_path gpt2-xl --output_file output_autoreg
 
 Following summary must be printed in output_autoreg.summary file
 
